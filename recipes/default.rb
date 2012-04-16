@@ -6,3 +6,4 @@
 #
 
 package 'netatalk'
+package 'avahi-daemon'
