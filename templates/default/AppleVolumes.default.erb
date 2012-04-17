@@ -1,0 +1,5 @@
+:DEFAULT: options:upriv,usedots
+
+<% node[:timemachine_server][:timemachine_user_homedirs].each do |user, dir| %>
+<%= dir %> TimeMachine allow:<%= user %> options:tm
+<% end %>
