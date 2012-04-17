@@ -24,3 +24,23 @@ template '/etc/netatalk/AppleVolumes.default' do
   mode '644'
   notifies :restart, 'service[netatalk]'
 end
+
+node[:timemachine_server][:timemachine_user_homedirs].each do |tm_user, dir|
+  tm_user_group = 'nogroup'
+  tm_user_gid = node[:etc][:group][tm_user_group][:gid]
+
+  user tm_user do
+    comment 'TimeMachine user'
+    shell '/bin/false'
+    home dir
+    gid tm_user_gid
+    system true
+  end
+  directory dir do
+    action :create
+    recursive true
+    owner tm_user
+    group tm_user_group
+    mode '700'
+  end
+end
