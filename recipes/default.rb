@@ -18,5 +18,9 @@ end
 cookbook_file '/etc/avahi/services/afpd.service' do
   mode '644'
   notifies :restart, 'service[avahi-daemon]'
+end
+
+cookbook_file '/etc/netatalk/AppleVolumes.default' do
+  mode '644'
   notifies :restart, 'service[netatalk]'
 end
